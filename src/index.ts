@@ -21,17 +21,38 @@ let datos = covidAfter;
 
 const affectedRadiusScale = d3
   .scaleThreshold<number, number>()
-  .domain([10,50,100,500,1000,5000])
-  .range([5,10,30,50,70,100]);
+  .domain([10, 50, 100, 500, 1000, 5000])
+  .range([5, 10, 30, 50, 70, 100]);
 
-const calculateRadiusBasedOnAffectedCases = (comunidad: string) => { 
+const calculateRadiusBasedOnAffectedCases = (comunidad: string) => {
   const entry = datos.find((item) => item.name === comunidad);
-  var max = datos.reduce((max, item) => (item.value > max ? item.value: max), 0);
+  var max = datos.reduce(
+    (max, item) => (item.value > max ? item.value : max),
+    0
+  );
   return entry ? affectedRadiusScale(entry.value) : 0;
 };
 
+const color = d3
+  .scaleThreshold<number, string>()
+  .domain([0, 10, 50, 100, 500, 1000, 5000])
+  .range([
+    "#FFFFFF",
+    "#FFE8E5",
+    "#F88F70",
+    "#CD6A4E",
+    "#A4472D",
+    "#7B240E",
+    "#540000",
+  ]);
+
+const assignCommunityColor = (comunidad: string) => {
+  const entry = datos.find((item) => item.name === comunidad);
+
+  return entry ? color(entry.value) : color(0);
+};
 const aProjection = d3Composite
-  .geoConicConformalSpain() 
+  .geoConicConformalSpain()
   .scale(3300)
   .translate([500, 400]);
 
@@ -57,8 +78,10 @@ svg
   .enter()
   .append("path")
   .attr("class", "country")
-  .attr("d", geoPath as any);
-
+  .attr("d", geoPath as any)
+  .style("fill", function (d: any) {
+    return assignCommunityColor(d.properties.NAME_1);
+  });
 svg
   .selectAll("circle")
   .data(latLongCommunities)
@@ -69,29 +92,27 @@ svg
   .attr("cx", (d) => aProjection([d.long, d.lat])[0])
   .attr("cy", (d) => aProjection([d.long, d.lat])[1]);
 
-  const updateChart = (covid: resultado[]) => {
-    datos = covid;
-    svg
-      .selectAll("circle")
-      .data(latLongCommunities)
-      .transition()
-      .duration(800)
-      .attr("r", (d) => {
-        return calculateRadiusBasedOnAffectedCases(d.name);
-      });
-  };
-  
-  document
-    .getElementById("CovidBefore")
-    .addEventListener("click", function () {
-      console.log(covidBefore);
-      updateChart(covidBefore);
-  });
-  
-  document
-    .getElementById("CovidAfter")
-    .addEventListener("click", function () {
-      console.log(covidAfter);
-      updateChart(covidAfter);
-  });
-  
+const updateChart = (covid: resultado[]) => {
+  datos = covid;
+  svg
+    .selectAll("circle")
+    .data(latLongCommunities)
+    .transition()
+    .duration(800)
+    .attr("r", (d) => {
+      return calculateRadiusBasedOnAffectedCases(d.name);
+    })
+    .style("fill", function (d: any) {
+      return assignCommunityColor(d.properties.NAME_1);
+    });
+};
+
+document.getElementById("CovidBefore").addEventListener("click", function () {
+  console.log(covidBefore);
+  updateChart(covidBefore);
+});
+
+document.getElementById("CovidAfter").addEventListener("click", function () {
+  console.log(covidAfter);
+  updateChart(covidAfter);
+});

@@ -6,7 +6,7 @@ export interface resultado {
 
 export const covidBefore: resultado[] = [
   {
-    name: "Madrid",
+    name: "Comunidad de Madrid",
     value: 174,
   },
   {
@@ -26,7 +26,7 @@ export const covidBefore: resultado[] = [
     value: 30,
   },
   {
-    name: "Murcia",
+    name: "Región de Murcia",
     value: 0,
   },
   {
@@ -34,7 +34,7 @@ export const covidBefore: resultado[] = [
     value: 6,
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     value: 16,
   },
   {
@@ -46,7 +46,7 @@ export const covidBefore: resultado[] = [
     value: 10,
   },
   {
-    name: "Asturias",
+    name: "Principado de Asturias",
     value: 5,
   },
   {
@@ -69,11 +69,15 @@ export const covidBefore: resultado[] = [
     name: "Islas Baleares",
     value: 6,
   },
+  {
+    name: "Navarra",
+    value: 0,
+  },
 ];
 
 export const covidAfter: resultado[] = [
   {
-    name: "Madrid",
+    name: "Comunidad de Madrid",
     value: 1849,
   },
   {
@@ -93,7 +97,7 @@ export const covidAfter: resultado[] = [
     value: 119,
   },
   {
-    name: "Murcia",
+    name: "Región de Murcia",
     value: 39,
   },
   {
@@ -101,7 +105,7 @@ export const covidAfter: resultado[] = [
     value: 85,
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     value: 79,
   },
   {
@@ -113,7 +117,7 @@ export const covidAfter: resultado[] = [
     value: 134,
   },
   {
-    name: "Asturias",
+    name: "Principado de Asturias",
     value: 126,
   },
   {
@@ -134,6 +138,10 @@ export const covidAfter: resultado[] = [
   },
   {
     name: "Islas Baleares",
+    value: 40,
+  },
+  {
+    name: "Navarra",
     value: 40,
   },
 ];
