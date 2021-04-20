@@ -60,7 +60,7 @@ export const latLongCommunities = [
     lat: 41.383333,
   },
   {
-    name: "Castilla La Mancha",
+    name: "Castilla-La Mancha",
     long: -3.000033,
     lat: 39.500011,
   },

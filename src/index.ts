@@ -22,7 +22,7 @@ let datos = covidAfter;
 const affectedRadiusScale = d3
   .scaleThreshold<number, number>()
   .domain([10, 50, 100, 500, 1000, 5000])
-  .range([5, 10, 30, 50, 70, 100]);
+  .range([5, 10, 20, 30, 40, 50]);
 
 const calculateRadiusBasedOnAffectedCases = (comunidad: string) => {
   const entry = datos.find((item) => item.name === comunidad);
@@ -95,6 +95,15 @@ svg
 const updateChart = (covid: resultado[]) => {
   datos = covid;
   svg
+    .selectAll("path")
+    .data(geojson["features"])
+    .transition()
+    .duration(800)  
+    .style("fill", function (d: any) {
+      return assignCommunityColor(d.properties.NAME_1);
+    });
+
+  svg
     .selectAll("circle")
     .data(latLongCommunities)
     .transition()
@@ -102,9 +111,7 @@ const updateChart = (covid: resultado[]) => {
     .attr("r", (d) => {
       return calculateRadiusBasedOnAffectedCases(d.name);
     })
-    .style("fill", function (d: any) {
-      return assignCommunityColor(d.properties.NAME_1);
-    });
+
 };
 
 document.getElementById("CovidBefore").addEventListener("click", function () {

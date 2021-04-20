@@ -6,7 +6,7 @@ export interface resultado {
 
 export const covidBefore: resultado[] = [
   {
-    name: "Comunidad de Madrid",
+    name: "Madrid",
     value: 174,
   },
   {
@@ -26,7 +26,7 @@ export const covidBefore: resultado[] = [
     value: 30,
   },
   {
-    name: "Región de Murcia",
+    name: "Murcia",
     value: 0,
   },
   {
@@ -46,7 +46,7 @@ export const covidBefore: resultado[] = [
     value: 10,
   },
   {
-    name: "Principado de Asturias",
+    name: "Asturias",
     value: 5,
   },
   {
@@ -77,7 +77,7 @@ export const covidBefore: resultado[] = [
 
 export const covidAfter: resultado[] = [
   {
-    name: "Comunidad de Madrid",
+    name: "Madrid",
     value: 1849,
   },
   {
@@ -97,7 +97,7 @@ export const covidAfter: resultado[] = [
     value: 119,
   },
   {
-    name: "Región de Murcia",
+    name: "Murcia",
     value: 39,
   },
   {
@@ -117,7 +117,7 @@ export const covidAfter: resultado[] = [
     value: 134,
   },
   {
-    name: "Principado de Asturias",
+    name: "Asturias",
     value: 126,
   },
   {
